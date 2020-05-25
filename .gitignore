@@ -4,3 +4,4 @@ haters/
 .cache/
 dist/
 .vscode
+.parcel-cache

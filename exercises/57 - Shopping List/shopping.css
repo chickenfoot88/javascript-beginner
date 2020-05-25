@@ -43,8 +43,8 @@ body {
 }
 
 .shopping-item button {
-  padding: 0;
-  font-size: 1rem;
+  padding: 2px;
+  font-size: 1.4rem;
   cursor: pointer;
   transition: transform 0.2s;
 }
