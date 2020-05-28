@@ -7,7 +7,6 @@ function Slider(slider) {
   const slides = slider.querySelector('.slides');
   const prevButton = slider.querySelector('.goToPrev');
   const nextButton = slider.querySelector('.goToNext');
-  console.log(slider);
 
   function startSlider() {
     current = slider.querySelector('.current') || slides.firstElementChild;
@@ -15,13 +14,39 @@ function Slider(slider) {
     next = current.nextElementSibling || slider.firstElementChild;
   }
 
+  function move(direction) {
+    const classesToRemove = ['prev', 'current', 'next'];
+    [prev, current, next].forEach(el =>
+      el.classList.remove(...classesToRemove)
+    );
+    if (direction === 'back') {
+      [prev, current, next] = [
+        prev.previousElementSibling || slides.lastElementChild,
+        prev,
+        current,
+      ];
+    } else {
+      [prev, current, next] = [
+        current,
+        next,
+        next.nextElementSibling || slides.firstElementChild,
+      ];
+    }
+
+    // eslint-disable-next-line no-use-before-define
+    applyClasses();
+  }
+
   function applyClasses() {
-    current.classList.add('.current');
-    prev.classList.add('.prev');
-    next.classList.add('.next');
+    current.classList.add('current');
+    prev.classList.add('prev');
+    next.classList.add('next');
   }
 
   startSlider();
+  applyClasses();
+  prevButton.addEventListener('click', () => move('back'));
+  nextButton.addEventListener('click', move);
 }
 
 const mySlider = Slider(document.querySelector('.slider'));
